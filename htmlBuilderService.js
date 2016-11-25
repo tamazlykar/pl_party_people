@@ -36,27 +36,16 @@
                 year: 'numeric',
                 month: 'long',
                 day: 'numeric',
-                timezone: 'America/Los_Angeles',
-                timeZoneName: "short",
                 hour: 'numeric',
                 minute: 'numeric'
             };
-            return '<div class="date">' + date.toLocaleString("en-US", options) + ' (UTC) '  + '</div>';
+            return '<div class="date">' + date.toLocaleString("en-US", options) + '</div>';
         }
 
         return '<div class="event">' + createName(event.name) +
                                         createDescription(event.description) +
                                         createAddress(event.address) +
                                         createDate(event.date) +'</div>'
-    }
-
-    function formatDate(date1) {
-        let date = new Date(32);
-        return date.getUTCMonth() + ' ' +
-            date.getUTCDate() + ' ' +
-            date.getUTCFullYear() + ' ' +
-            date.getUTCHours() + ':' +
-            date.getUTCMinutes() + ' (UTC)';
     }
 
     window.htmlBuilder = {

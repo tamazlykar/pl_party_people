@@ -1,7 +1,9 @@
 'use strict';
 
+// sorry about spaggeti code and so unoptimized =(
+// it was too late to fix this
+
 (function () {
-    let url1 = 'https://api.meetup.com/2/open_events?key=676e713e5f123c3f786f2277597a7a43&photo-host=public&zip=98101&topic=web,machine-learning, softwaredev,computer-programming,web-development&limited_events=true&category=34&page=5&only=name,description,time,venue';
     let url = 'https://api.meetup.com/2/open_events?key=676e713e5f123c3f786f2277597a7a43&' +
         'photo-host=public' +
         '&zip=98101&' +
@@ -50,11 +52,10 @@
     }
 
     function ok(data) {
-        console.log(data);
-        for (let i = 0; i < data.results.length; i++) {
-            console.log(data.results[i]);
-        }
-        mainFlow(data.results);
+
+        console.log("Strat: " + getNewWeekInMs());
+        console.log("Stop: " + getEndOfNewWeekInMs(getNewWeekInMs()));
+        mainFlow(data.results, getNewWeekInMs(), getEndOfNewWeekInMs(getNewWeekInMs()));
     }
 
     function fail(url) {
@@ -63,12 +64,12 @@
 
     function getNewWeekInMs() {
         let today = new Date();
-        let newWeek = new Date(today.getTime() + (7 - today.getDay() + 1) * 24 * 60 * 60 * 1000);
+        let newWeek = new Date(today.getTime() + (7 - today.getDay() + 2) * 24 * 60 * 60 * 1000);
         return newWeek.setUTCHours(0, 0, 0, 0);
     }
 
     function getEndOfNewWeekInMs(newWeek) {
-        return newWeek + 7 * 24 * 60 * 60 * 1000;
+        return newWeek + 7 * 24 * 60 * 60 * 1000 - 1000;
     }
 
     scriptRequest(url, ok, fail);

@@ -3,20 +3,26 @@
 let div = document.getElementById('main');
 
 
+function mainFlow(dataArray, bWeek, eWeek) {
+    let weekTitle = document.getElementById('nextWeek');
+    weekTitle.innerHTML = 'Week from ' +
+        getDateFromMiliseconds(bWeek, true).toLocaleString("en-US", {month: 'long', day: 'numeric'}) +
+        ' to ' +
+        getDateFromMiliseconds(eWeek, true).toLocaleString("en-US", {month: 'long', day: 'numeric'});
 
 
 
-function mainFlow(dataArray) {
   sortResults(dataArray);
 
-  for (let i = 0; i < days.length; i++) {
-      let day = days[i];
+  let daysRuOrder = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
+  for (let i = 0; i < daysRuOrder.length; i++) {
+      let day = daysRuOrder[i];
       let dayEvents = results[day];
 
       html += htmlBuilder.createDayOfWeek(dayEvents, day);
   }
 
-  console.log(html);
   div.innerHTML += html;
 }
 
@@ -35,21 +41,26 @@ function sortResults(data) {
             addr.name;
         }
 
-        let day = days[obj.date.getUTCDay()];
+        let day = days[obj.date.getDay()];
         results[day].push(obj);
     }
-    console.log(results);
-}
-function getDateFromMiliseconds(ms) {
-    return new Date(ms);
 }
 
+function getDateFromMiliseconds(ms, uts = false) {
+    let d = new Date();
+    let n = d.getTimezoneOffset();
+    let offset_fromUTC_to_Seattle = -8*60;
+    if (uts) {
+        return new Date(ms+(60000*(n)));
+    }
+    return new Date(ms+(60000*(n+offset_fromUTC_to_Seattle)));
+}
 
 
 let results = {};
 let html = '';
 
-let days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 for (let i = 0; i < days.length; i++) {
     results[days[i]] = [];
 }
