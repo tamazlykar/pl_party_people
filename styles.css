@@ -1,0 +1,50 @@
+img {
+    width: 558px;
+}
+
+#header {
+    text-align: center;
+    padding-bottom: 30px;
+}
+
+#main {
+    width: 600px;
+    margin: 0 auto;
+}
+
+#nextWeek {
+    font-size: 24px;
+}
+
+.dayOfWeek h2 {
+    text-align: center;
+}
+
+.event {
+    border: 1px solid black;
+    margin-bottom: 5px;
+}
+
+.event h3 {
+    text-align: center;
+}
+
+.event .date{
+    text-align: right;
+    padding-top: 0px;
+    padding-right: 30px;
+    padding-left: 0px;
+    padding-bottom: 10px;
+}
+
+.event .description {
+    padding-top: 0px;
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-bottom: 0px;
+}
+
+.event .address {
+    text-align: right;
+    padding-right: 30px;
+}
